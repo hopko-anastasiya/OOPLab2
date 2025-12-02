@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OOPLab2.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+
+            <HorizontalStackLayout Spacing="10">
+                <Button x:Name="LoadXmlButton" Text="Завантажити XML" Clicked="LoadXmlButton_Clicked" WidthRequest="150" />
+                <Label x:Name="XmlFileLabel" Text="XML-файл: не вибрано" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <Label Text="Оберіть критерій пошуку:" FontAttributes="Bold" />
+            <Picker x:Name="SearchCriteriaPicker" Title="Виберіть критерій..." SelectedIndexChanged="SearchCriteriaPicker_SelectedIndexChanged">
+                <Picker.Items>
+                    <x:String>Спеціальність</x:String>
+                    <x:String>Ім'я автора</x:String>
+                    <x:String>Назва роботи</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Label Text="Введіть значення для пошуку:" FontAttributes="Bold" />
+            <Entry x:Name="SearchValueEntry" Placeholder="Введіть значення..." TextChanged="SearchValueEntry_TextChanged" />
+
+
+            <Label Text="Оберіть метод аналізу (Стратегію):" FontAttributes="Bold" />
+            <HorizontalStackLayout Spacing="10">
+                <RadioButton x:Name="SaxRadio" Content="SAX" GroupName="Strategy" CheckedChanged="StrategyRadio_CheckedChanged" IsChecked="True" />
+                <RadioButton x:Name="DomRadio" Content="DOM" GroupName="Strategy" CheckedChanged="StrategyRadio_CheckedChanged" />
+                <RadioButton x:Name="LinqRadio" Content="LINQ" GroupName="Strategy" CheckedChanged="StrategyRadio_CheckedChanged" />
+            </HorizontalStackLayout>
+
+            <Grid ColumnDefinitions="*, *, *" ColumnSpacing="10" RowSpacing="10">
+                <Button x:Name="AnalyzeButton" Text="1. Виконати Аналіз" Clicked="AnalyzeButton_Clicked" IsEnabled="False" Grid.Column="0" />
+                <Button x:Name="TransformButton" Text="2. Трансформація → HTML" Clicked="TransformButton_Clicked" IsEnabled="False" Grid.Column="1" />
+                <Button x:Name="ClearButton" Text="Clear" Clicked="ClearButton_Clicked" Grid.Column="2" BackgroundColor="#808080"/>
+            </Grid>
+
+
+            <Label Text="Результати:" FontAttributes="Bold" />
+            <Editor x:Name="OutputEditor" HeightRequest="250" IsReadOnly="True" Placeholder="Тут будуть результати аналізу або повідомлення про трансформацію..." />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
