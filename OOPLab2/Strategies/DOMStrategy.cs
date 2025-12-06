@@ -10,7 +10,7 @@ namespace OOPLab2.Strategies
 {
    public class DOMStrategy : IXmlAnalysisStrategy
     {
-        public string StrategyName => "DOM (XmlDocument)";
+        public string StrategyName => "DOM";
 
         public Task<string> Analyze(string xmlContent, string searchParam)
         {
@@ -22,7 +22,10 @@ namespace OOPLab2.Strategies
             string criteria = parts.Length > 0 ? parts[0] : "";
             string value = parts.Length > 1 ? parts[1] : "";
 
-            results.AppendLine($"--- Пошук '{value}' за критерієм '{criteria}' (DOM) ---");
+
+            results.AppendLine($"Результати пошуку за критерієм '{criteria}'");
+            results.AppendLine($"Значення: '{value}' (Метод: DOM)");
+            results.AppendLine();
 
             XmlNodeList materialNodes = null;
             switch (criteria)
@@ -45,21 +48,25 @@ namespace OOPLab2.Strategies
             {
                 foreach (XmlNode materialNode in materialNodes)
                 {
-                    string authorName = materialNode.SelectSingleNode("author")?.InnerText;
+                    XmlNode authorNode = materialNode.SelectSingleNode("author");
+                    string authorName = authorNode?.InnerText;
+                    string faculty = authorNode?.Attributes?["faculty"]?.Value;
+                    string department = authorNode?.Attributes?["department"]?.Value;
                     string title = materialNode.SelectSingleNode("title")?.InnerText;
                     string pages = materialNode.SelectSingleNode("pages")?.InnerText;
                     string type = materialNode.Attributes["type"]?.Value;
                     string date = materialNode.SelectSingleNode("date")?.InnerText;
-                    results.AppendLine($"Вид: {type} | Автор: **{authorName}**");
-                    results.AppendLine($"Назва: {title} (Сторінок: {pages}) | Дата: {date}");
-                    results.AppendLine("---");
+                    results.AppendLine($"Автор: {authorName} ({faculty}|{department})");
+                    results.AppendLine($"Назва: {title} ({type})");
+                    results.AppendLine($"Сторінок: {pages} | Дата: {date}");
+                    results.AppendLine("─────────────────────────────────────────────────");
                 }
             }
             else
             {
-                results.AppendLine("Не знайдено матеріалів за заданим критерієм.");
+                results.AppendLine("❌ Не знайдено матеріалів за заданим критерієм.");
             }
-            results.AppendLine("-------------------------------------------------------");
+            results.AppendLine("═════════════════════════════════════════════════════════");
             return Task.FromResult(results.ToString());
         }
     }

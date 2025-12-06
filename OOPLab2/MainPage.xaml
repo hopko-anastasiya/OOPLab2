@@ -21,7 +21,7 @@
             </Picker>
 
             <Label Text="Введіть значення для пошуку:" FontAttributes="Bold" />
-            <Entry x:Name="SearchValueEntry" Placeholder="Введіть значення..." TextChanged="SearchValueEntry_TextChanged" />
+            <Entry x:Name="SearchValueEntry" TextChanged="SearchValueEntry_TextChanged" />
 
 
             <Label Text="Оберіть метод аналізу (Стратегію):" FontAttributes="Bold" />

@@ -10,7 +10,7 @@ namespace OOPLab2.Strategies
 {
     public class SAXStrategy : IXmlAnalysisStrategy
     {
-        public string StrategyName => "SAX (XmlReader)";
+        public string StrategyName => "SAX";
 
         public Task<string> Analyze(string xmlContent, string searchParam)
         {
@@ -19,11 +19,15 @@ namespace OOPLab2.Strategies
             var parts = searchParam.Split('|');
             string criteria = parts.Length > 0 ? parts[0] : "";
             string value = parts.Length > 1 ? parts[1] : "";
-            results.AppendLine($"--- Пошук '{value}' за критерієм '{criteria}' (SAX) ---");
+            
+            results.AppendLine($"Результати пошуку за критерієм '{criteria}'");
+            results.AppendLine($"Значення: '{value}' (Метод: SAX)");
+            results.AppendLine();
+            
             bool foundMatch = false;
 
             // Для зручності зберігаємо дані поточного material
-            string? currentAuthor = null, currentFaculty = null, currentTitle = null, currentPages = null, currentType = null, currentDate = null;
+            string? currentAuthor = null, currentFaculty = null, currentDepartment = null, currentTitle = null, currentPages = null, currentType = null, currentDate = null;
 
             using (var reader = XmlReader.Create(new StringReader(xmlContent)))
             {
@@ -35,10 +39,11 @@ namespace OOPLab2.Strategies
                         {
                             case "material":
                                 currentType = reader.GetAttribute("type");
-                                currentAuthor = currentFaculty = currentTitle = currentPages = currentDate = null;
+                                currentAuthor = currentFaculty = currentDepartment = currentTitle = currentPages = currentDate = null;
                                 break;
                             case "author":
                                 currentFaculty = reader.GetAttribute("faculty");
+                                currentDepartment = reader.GetAttribute("department");
                                 currentAuthor = reader.ReadElementContentAsString();
                                 break;
                             case "title":
@@ -69,9 +74,10 @@ namespace OOPLab2.Strategies
                         }
                         if (match)
                         {
-                            results.AppendLine($"Вид: {currentType} | Автор: **{currentAuthor}**");
-                            results.AppendLine($"Назва: {currentTitle} (Сторінок: {currentPages}) | Дата: {currentDate}");
-                            results.AppendLine("---");
+                            results.AppendLine($"Автор: {currentAuthor} ({currentFaculty}|{currentDepartment})");
+                            results.AppendLine($"Назва: {currentTitle} ({currentType})");
+                            results.AppendLine($"Сторінок: {currentPages} | Дата: {currentDate}");
+                            results.AppendLine("─────────────────────────────────────────────────");
                             foundMatch = true;
                         }
                     }
@@ -80,9 +86,9 @@ namespace OOPLab2.Strategies
 
             if (!foundMatch)
             {
-                results.AppendLine("Не знайдено матеріалів за заданим критерієм.");
+                results.AppendLine("❌ Не знайдено матеріалів за заданим критерієм.");
             }
-            results.AppendLine("-------------------------------------------------------");
+            results.AppendLine("═════════════════════════════════════════════════════════");
             
             return Task.FromResult(results.ToString());
         }

@@ -141,12 +141,27 @@ namespace OOPLab2
             if (SearchCriteriaPicker.SelectedIndex != -1 && SearchCriteriaPicker.SelectedItem != null)
             {
                 _selectedCriteria = SearchCriteriaPicker.SelectedItem.ToString();
+                UpdateSearchPlaceholder(_selectedCriteria);
+                SearchValueEntry.Text = string.Empty;
             }
             else
             {
                 _selectedCriteria = "";
+                SearchValueEntry.Placeholder = "Виберіть критерій...";
+                SearchValueEntry.Text = string.Empty;
             }
             AnalyzeButton.IsEnabled = !string.IsNullOrWhiteSpace(_searchValue) && !string.IsNullOrWhiteSpace(_selectedCriteria);
+        }
+
+        private void UpdateSearchPlaceholder(string criteria)
+        {
+            SearchValueEntry.Placeholder = criteria switch
+            {
+                "Спеціальність" => "Наприклад: КН",
+                "Ім'я автора" => "Наприклад: Петренко О.В.",
+                "Назва роботи" => "Наприклад: Розробка веб-застосунку",
+                _ => "Введіть значення..."
+            };
         }
 
         private void SearchValueEntry_TextChanged(object sender, TextChangedEventArgs e)

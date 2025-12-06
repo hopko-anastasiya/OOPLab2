@@ -1,43 +1,43 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <archive name="Електронний Архів Факультету КН" creationDate="2025-12-01">
 	<material type="Article" id="1001">
-		<author faculty="КН" department="АСОІУ">Іванов В.С.</author>
+		<author faculty="КН" department="ТТП">Іванов В.С.</author>
 		<title>Основи MAUI-розробки</title>
 		<pages>15</pages>
 		<date>2025-11-20</date>
 	</material>
 	<material type="Thesis" id="1002">
-		<author faculty="ПМ" department="ММ">Петренко Н.І.</author>
+		<author faculty="ПМ" department="ІОС">Петренко Н.І.</author>
 		<title>Моделювання складних систем</title>
 		<pages>120</pages>
 		<date>2024-05-15</date>
 	</material>
 	<material type="Article" id="1003">
-		<author faculty="КН" department="АСОІУ">Сидорова О.П.</author>
+		<author faculty="КН" department="ТК">Сидорова О.П.</author>
 		<title>Безпека даних у хмарних сховищах</title>
 		<pages>10</pages>
 		<date>2025-10-01</date>
 	</material>
 	<material type="Monograph" id="1004">
-		<author faculty="ІПЗ" department="Електроніка">Коваленко Л.М.</author>
+		<author faculty="ІПЗ" department="ОМ">Коваленко Л.М.</author>
 		<title>Фізика напівпровідників</title>
 		<pages>200</pages>
 		<date>2023-09-10</date>
 	</material>
 	<material type="Article" id="1005">
-		<author faculty="КН" department="ІПЗ">Гончарук Д.В.</author>
+		<author faculty="КН" department="ТК">Гончарук Д.В.</author>
 		<title>Штучний інтелект у медицині</title>
 		<pages>18</pages>
 		<date>2025-06-30</date>
 	</material>
 	<material type="Thesis" id="1006">
-		<author faculty="ПМ" department="ММ">Бондаренко І.О.</author>
+		<author faculty="ПМ" department="ПС">Бондаренко І.О.</author>
 		<title>Чисельні методи оптимізації</title>
 		<pages>95</pages>
 		<date>2023-12-12</date>
 	</material>
 	<material type="Article" id="1007">
-		<author faculty="ІПЗ" department="Електроніка">Мельник С.Г.</author>
+		<author faculty="ІПЗ" department="МСС">Мельник С.Г.</author>
 		<title>Електронні пристрої XXI століття</title>
 		<pages>22</pages>
 		<date>2025-03-05</date>
